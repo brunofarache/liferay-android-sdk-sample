@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import com.liferay.client.service.ServiceContext;
 import com.liferay.client.v62.group.GroupService;
+import com.liferay.mobile.sample.activity.MainActivity;
 import com.liferay.mobile.sample.model.UserSite;
 
 import android.os.AsyncTask;
@@ -32,7 +33,11 @@ import android.util.Log;
 public class UserSitesAsyncTask extends
 		AsyncTask<Void, Void, ArrayList<UserSite>> {
 
-	protected ArrayList<UserSite> doInBackground(Void... params) {
+	public UserSitesAsyncTask(MainActivity activity) {
+		_activity = activity;
+	}
+
+	public ArrayList<UserSite> doInBackground(Void... params) {
 		ArrayList<UserSite> userSites = new ArrayList<UserSite>();
 
 		ServiceContext context = new ServiceContext(
@@ -56,6 +61,12 @@ public class UserSitesAsyncTask extends
 		return userSites;
 	}
 	
+	public void onPostExecute(ArrayList<UserSite> sites) {
+		_activity.updateUserSites(sites);
+	}
+
 	private static String _TAG = UserSitesAsyncTask.class.getName();
+
+	private MainActivity _activity;
 
 }

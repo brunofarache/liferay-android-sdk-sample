@@ -14,25 +14,36 @@
 
 package com.liferay.mobile.sample.activity;
 
+import java.util.ArrayList;
+
 import com.liferay.mobile.sample.R;
+import com.liferay.mobile.sample.model.UserSite;
 import com.liferay.mobile.sample.task.UserSitesAsyncTask;
 
+import android.os.Build;
 import android.os.Bundle;
-import android.app.Activity;
+import android.annotation.SuppressLint;
+import android.app.ListActivity;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 
 /**
  * @author Bruno Farache
  */
-public class MainActivity extends Activity {
+@SuppressLint("NewApi")
+@SuppressWarnings("unchecked")
+public class MainActivity extends ListActivity {
 
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 
-		setContentView(R.layout.main);
+		ArrayAdapter<UserSite> adapter = new ArrayAdapter<UserSite>(
+			this, android.R.layout.simple_list_item_1);
 
-		UserSitesAsyncTask task = new UserSitesAsyncTask();
-		
+		setListAdapter(adapter);
+
+		UserSitesAsyncTask task = new UserSitesAsyncTask(this);
+
 		task.execute();
 	}
 
@@ -40,6 +51,20 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 
 		return true;
+	}
+
+	public void updateUserSites(ArrayList<UserSite> sites) {
+		ArrayAdapter<UserSite> adapter = 
+			(ArrayAdapter<UserSite>)getListAdapter();
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			adapter.addAll(sites);
+		}
+		else {
+			for (UserSite site : sites) {
+				adapter.add(site);
+			}
+		} 
 	}
 
 }

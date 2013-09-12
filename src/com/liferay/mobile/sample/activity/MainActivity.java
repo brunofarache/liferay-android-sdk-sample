@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.main);
 
 		UserSitesAsyncTask task = new UserSitesAsyncTask();
 		

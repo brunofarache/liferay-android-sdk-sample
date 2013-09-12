@@ -33,11 +33,7 @@ public class UserSite implements Comparable<UserSite>, Serializable {
 
 	public static final String GROUP_ID = "groupId";
 
-	public static final String LAST_SYNC = "lastSync";
-
 	public static final String NAME = "name";
-
-	public static final String ORGANIZATION_NAME_SUFFIX = " LFR_ORGANIZATION";
 
 	public static final String SITE = "site";
 

@@ -55,7 +55,7 @@ public class UserSitesAsyncTask extends
 			}
 		}
 		catch (Exception e) {
-			Log.e(_TAG, "Couldn't get user sites", e);
+			Log.e(_CLASS_NAME, "Couldn't get user sites", e);
 		}
 		
 		return userSites;
@@ -65,7 +65,7 @@ public class UserSitesAsyncTask extends
 		_activity.updateUserSites(sites);
 	}
 
-	private static String _TAG = UserSitesAsyncTask.class.getName();
+	private static String _CLASS_NAME = UserSitesAsyncTask.class.getName();
 
 	private MainActivity _activity;
 

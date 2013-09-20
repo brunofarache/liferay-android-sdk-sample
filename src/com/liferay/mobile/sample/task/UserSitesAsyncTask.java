@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.liferay.client.service.ServiceContext;
-import com.liferay.client.v62.group.GroupService;
+import com.liferay.mobile.android.service.ServiceContext;
+import com.liferay.mobile.android.v62.group.GroupService;
 import com.liferay.mobile.sample.activity.MainActivity;
 import com.liferay.mobile.sample.model.UserSite;
 

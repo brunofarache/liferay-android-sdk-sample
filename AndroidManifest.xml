@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.liferay.mobile.sample"
 	android:versionCode="1"
-	android:versionName="0.1.0" >
+	android:versionName="0.2.0" >
 
 	<uses-sdk
 		android:minSdkVersion="10"
@@ -26,5 +26,10 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+
+		<activity
+			android:name=".activity.DetailsActivity"
+			android:configChanges="orientation|screenSize"
+			android:uiOptions="splitActionBarWhenNarrow" />
 	</application>
 </manifest>

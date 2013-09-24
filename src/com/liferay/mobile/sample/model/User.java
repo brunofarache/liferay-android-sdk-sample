@@ -13,6 +13,8 @@ public class User implements Comparable<User>, Serializable {
 
 	public static final String EMAIL_ADDRESS = "emailAddress";
 
+	public static final String LAST_NAME = "lastName";
+
 	public static final String NAME = "firstName";
 
 	public static final String USER_ID = "userId";
@@ -21,6 +23,7 @@ public class User implements Comparable<User>, Serializable {
 		_userId = jsonObj.getLong(USER_ID);
 		_contactId = jsonObj.getLong(CONTACT_ID);
 		_name = jsonObj.getString(NAME);
+		_lastName = jsonObj.getString(LAST_NAME);
 		_emailAddress = jsonObj.getString(EMAIL_ADDRESS);
 	}
 
@@ -39,6 +42,10 @@ public class User implements Comparable<User>, Serializable {
 	
 	public String getEmailAddress() {
 		return _emailAddress;
+	}
+
+	public String getLastName() {
+		return _lastName;
 	}
 
 	public String getName() {
@@ -61,6 +68,10 @@ public class User implements Comparable<User>, Serializable {
 		_emailAddress = emailAddress;
 	}
 
+	public void setLastName(String lastName) {
+		_lastName = lastName;
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}
@@ -73,9 +84,10 @@ public class User implements Comparable<User>, Serializable {
 		return _name;
 	}
 
-	private transient Contact _contact;
+	private Contact _contact;
 	private long _contactId;
 	private String _emailAddress;
+	private String _lastName;
 	private String _name;
 	private long _userId;
 

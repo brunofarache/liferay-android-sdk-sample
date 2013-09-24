@@ -23,15 +23,14 @@ public class Contact implements Serializable {
 	}
 	
 	protected DateFormat getDateFormatter() {
-		if (_dateFormatter == null) {
-			_dateFormatter = DateFormat.getDateTimeInstance(
-					DateFormat.SHORT, DateFormat.SHORT);
+		if (_formatter == null) {
+			_formatter = DateFormat.getDateInstance(DateFormat.LONG);
 		}
 		
-		return _dateFormatter;
+		return _formatter;
 	}
 	
 	private String _birthday;
-	private transient DateFormat _dateFormatter;
+	private transient DateFormat _formatter;
 
 }

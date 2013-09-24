@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -62,6 +63,14 @@ public class MainActivity extends ListActivity {
 
 			public void onSuccess(Contact contact) {
 				user.setContact(contact);
+
+				Intent intent = new Intent(
+					getBaseContext(), DetailsActivity.class);
+
+				intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				intent.putExtra(DetailsActivity.EXTRA_USER, user);
+
+				startActivity(intent);
 			}
 
 			public Contact transform(Object obj) {

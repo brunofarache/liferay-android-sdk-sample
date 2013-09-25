@@ -1,5 +1,8 @@
 package com.liferay.mobile.sample.task.callback;
 
+import java.util.ArrayList;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,15 +11,40 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.liferay.mobile.android.task.callback.BaseAsyncTaskCallback;
+import com.liferay.mobile.android.v62.phone.PhoneService;
 import com.liferay.mobile.sample.activity.DetailsActivity;
 import com.liferay.mobile.sample.model.Contact;
 import com.liferay.mobile.sample.model.User;
+import com.liferay.mobile.sample.util.ServiceUtil;
 
 public class ContactCallback extends BaseAsyncTaskCallback<Contact> {
 
 	public ContactCallback(Context context, User user) {
 		_context = context;
 		_user = user;
+	}
+
+	public JSONArray inBackground(JSONArray array) {
+		PhoneService phoneService = new PhoneService(
+			ServiceUtil.getServiceContext());
+
+		try {
+			JSONArray jsonArray = phoneService.getPhones(
+				"com.liferay.portal.model.Contact", _user.getContactId());
+
+			_phones = new ArrayList<String>();
+
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObj = jsonArray.getJSONObject(i);
+
+				_phones.add(jsonObj.getString(_NUMBER));
+			}
+		}
+		catch (Exception e) {
+			Log.e(_CLASS_NAME, "Couldn't get Phones", e);
+		}
+
+		return array;
 	}
 
 	public void onFailure(Exception exception) {
@@ -38,7 +66,7 @@ public class ContactCallback extends BaseAsyncTaskCallback<Contact> {
 		Contact contact = null;
 
 		try {
-			contact = new Contact((JSONObject)obj);
+			contact = new Contact((JSONObject)obj, _phones);
 		}
 		catch (JSONException je) {
 			Log.e(_CLASS_NAME, "Couldn't transform JSONObject to Contact", je);
@@ -48,8 +76,10 @@ public class ContactCallback extends BaseAsyncTaskCallback<Contact> {
 	}
 
 	private static String _CLASS_NAME = ContactCallback.class.getName();
+	private static String _NUMBER = "number";
 
 	private Context _context;
+	ArrayList<String> _phones;
 	private User _user;
 
 }

@@ -39,6 +39,16 @@
 		<TextView
 			android:id="@+id/birthday_text_view"
 			style="@style/DetailValue" />
+
+		<TextView
+			android:id="@+id/phones_label"
+			style="?android:attr/listSeparatorTextViewStyle"
+			android:layout_marginTop="5dip"
+			android:text="@string/phones" />
+
+		<TextView
+			android:id="@+id/phone_text_view"
+			style="@style/DetailValue" />
 	</LinearLayout>
 	
 </ScrollView>

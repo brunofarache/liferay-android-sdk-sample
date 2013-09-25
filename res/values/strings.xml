@@ -4,5 +4,6 @@
 	<string name="birthday">Birthday</string>
 	<string name="email">Email</string>
 	<string name="name">Name</string>
+	<string name="phones">Phones</string>
 	<string name="settings">Settings</string>
 </resources>

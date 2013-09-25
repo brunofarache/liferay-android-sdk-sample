@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.liferay.mobile.sample.R;
+import com.liferay.mobile.sample.model.Contact;
 import com.liferay.mobile.sample.model.User;
 
 public class DetailsActivity extends Activity {
@@ -34,8 +35,15 @@ public class DetailsActivity extends Activity {
 		TextView email = (TextView)findViewById(R.id.email_text_view);
 		email.setText(_user.getEmailAddress());
 
+		Contact contact = _user.getContact();
+
 		TextView birthday = (TextView)findViewById(R.id.birthday_text_view);
-		birthday.setText(_user.getContact().getBirthday());
+		birthday.setText(contact.getBirthday());
+
+		if (!contact.getPhones().isEmpty()) {
+			TextView phone = (TextView)findViewById(R.id.phone_text_view);
+			phone.setText(contact.getPhones().get(0));
+		}
 	}
 	
 	private User _user;

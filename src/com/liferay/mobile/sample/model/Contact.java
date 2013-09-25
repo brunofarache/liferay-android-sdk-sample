@@ -13,15 +13,22 @@ public class Contact implements Serializable {
 
 	public static final String BIRTHDAY = "birthday";
 
+	public static final String EMAIL_ADDRESS = "emailAddress";
+
 	public Contact(JSONObject jsonObj, ArrayList<String> phones)
 		throws JSONException {
 
 		setBirthday(jsonObj.getLong(BIRTHDAY));
+		_emailAddress = jsonObj.getString(EMAIL_ADDRESS);
 		_phones = phones;
 	}
 	
 	public String getBirthday() {
 		return _birthday;
+	}
+
+	public String getEmailAddress() {
+		return _emailAddress;
 	}
 
 	public ArrayList<String> getPhones() {
@@ -32,6 +39,10 @@ public class Contact implements Serializable {
 		_birthday = getDateFormatter().format(new Date(timestamp));
 	}
 	
+	public void setEmailAddress(String emailAddress) {
+		_emailAddress = emailAddress;
+	}
+
 	public void setPhones(ArrayList<String> phones) {
 		_phones = phones;
 	}
@@ -45,6 +56,7 @@ public class Contact implements Serializable {
 	}
 	
 	private String _birthday;
+	private String _emailAddress;
 	private ArrayList<String> _phones = new ArrayList<String>();
 	private transient DateFormat _formatter;
 

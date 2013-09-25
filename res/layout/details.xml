@@ -46,9 +46,10 @@
 			android:layout_marginTop="5dip"
 			android:text="@string/phones" />
 
-		<TextView
-			android:id="@+id/phone_text_view"
-			style="@style/DetailValue" />
+		<ListView
+			android:id="@+id/phones_list_view"
+			android:layout_width="match_parent"
+			android:layout_height="200dip">
+		</ListView>
 	</LinearLayout>
-	
 </ScrollView>

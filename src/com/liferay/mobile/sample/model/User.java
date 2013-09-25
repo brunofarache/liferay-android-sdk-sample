@@ -11,8 +11,6 @@ public class User implements Comparable<User>, Serializable {
 
 	public static final String CONTACT_ID = "contactId";
 
-	public static final String EMAIL_ADDRESS = "emailAddress";
-
 	public static final String LAST_NAME = "lastName";
 
 	public static final String NAME = "firstName";
@@ -24,7 +22,6 @@ public class User implements Comparable<User>, Serializable {
 		_contactId = jsonObj.getLong(CONTACT_ID);
 		_name = jsonObj.getString(NAME);
 		_lastName = jsonObj.getString(LAST_NAME);
-		_emailAddress = jsonObj.getString(EMAIL_ADDRESS);
 	}
 
 	@SuppressLint("DefaultLocale")
@@ -40,10 +37,6 @@ public class User implements Comparable<User>, Serializable {
 		return _contactId;
 	}
 	
-	public String getEmailAddress() {
-		return _emailAddress;
-	}
-
 	public String getLastName() {
 		return _lastName;
 	}
@@ -64,10 +57,6 @@ public class User implements Comparable<User>, Serializable {
 		_contactId = contactId;
 	}
 	
-	public void setEmailAddress(String emailAddress) {
-		_emailAddress = emailAddress;
-	}
-
 	public void setLastName(String lastName) {
 		_lastName = lastName;
 	}
@@ -86,7 +75,6 @@ public class User implements Comparable<User>, Serializable {
 
 	private Contact _contact;
 	private long _contactId;
-	private String _emailAddress;
 	private String _lastName;
 	private String _name;
 	private long _userId;

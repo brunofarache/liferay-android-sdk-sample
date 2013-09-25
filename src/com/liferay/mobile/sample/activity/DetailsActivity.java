@@ -11,6 +11,12 @@ public class DetailsActivity extends Activity {
 
 	public static final String EXTRA_USER = "user";
 
+	public void finish() {
+		super.finish();
+
+		overridePendingTransition(0, 0);
+	}
+
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 

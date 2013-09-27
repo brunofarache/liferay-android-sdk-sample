@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.liferay.mobile.android.service.ServiceContext;
+import com.liferay.mobile.android.service.Session;
 import com.liferay.mobile.android.task.callback.AsyncTaskCallback;
 import com.liferay.mobile.android.v62.contact.ContactService;
 import com.liferay.mobile.sample.R;
@@ -47,12 +47,12 @@ public class MainActivity extends ListActivity {
 
 		User user = (User)getListAdapter().getItem(position);
 
-		ServiceContext context = ServiceUtil.getServiceContext();
-		ContactService contactService = new ContactService(context);
+		Session session = ServiceUtil.getSession();
+		ContactService contactService = new ContactService(session);
 
 		AsyncTaskCallback callback = new ContactCallback(this, user);
 
-		contactService.setCallback(callback);
+		session.setCallback(callback);
 
 		try {
 			contactService.getContact(user.getContactId());

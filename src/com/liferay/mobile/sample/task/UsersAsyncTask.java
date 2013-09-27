@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.liferay.mobile.android.service.ServiceContext;
+import com.liferay.mobile.android.service.Session;
 import com.liferay.mobile.android.v62.group.GroupService;
 import com.liferay.mobile.android.v62.user.UserService;
 import com.liferay.mobile.sample.activity.MainActivity;
@@ -24,11 +24,11 @@ public class UsersAsyncTask extends AsyncTask<Void, Void, ArrayList<User>> {
 	public ArrayList<User> doInBackground(Void... params) {
 		ArrayList<User> users = new ArrayList<User>();
 
-		ServiceContext context = ServiceUtil.getServiceContext();
-		UserService userService = new UserService(context);
+		Session session = ServiceUtil.getSession();
+		UserService userService = new UserService(session);
 
 		try {
-			long groupId = getGuestGroupId(context);
+			long groupId = getGuestGroupId(session);
 
 			JSONArray jsonArray = userService.getGroupUsers(groupId);
 			
@@ -49,10 +49,10 @@ public class UsersAsyncTask extends AsyncTask<Void, Void, ArrayList<User>> {
 		_activity.updateUsers(sites);
 	}
 	
-	protected long getGuestGroupId(ServiceContext context) throws Exception {
+	protected long getGuestGroupId(Session session) throws Exception {
 		long groupId = -1;
 
-		GroupService groupService = new GroupService(context);
+		GroupService groupService = new GroupService(session);
 		
 		JSONArray groups = groupService.getUserSites();
 		

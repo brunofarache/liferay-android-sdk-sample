@@ -25,8 +25,7 @@ public class ContactCallback extends BaseAsyncTaskCallback<Contact> {
 	}
 
 	public JSONArray inBackground(JSONArray array) {
-		PhoneService phoneService = new PhoneService(
-			ServiceUtil.getServiceContext());
+		PhoneService phoneService = new PhoneService(ServiceUtil.getSession());
 
 		try {
 			JSONArray jsonArray = phoneService.getPhones(

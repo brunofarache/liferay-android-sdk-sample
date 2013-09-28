@@ -10,7 +10,7 @@ import com.liferay.mobile.android.v62.group.GroupService;
 import com.liferay.mobile.android.v62.user.UserService;
 import com.liferay.mobile.sample.activity.MainActivity;
 import com.liferay.mobile.sample.model.User;
-import com.liferay.mobile.sample.util.ServiceUtil;
+import com.liferay.mobile.sample.util.SettingsUtil;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -24,7 +24,7 @@ public class UsersAsyncTask extends AsyncTask<Void, Void, ArrayList<User>> {
 	public ArrayList<User> doInBackground(Void... params) {
 		ArrayList<User> users = new ArrayList<User>();
 
-		Session session = ServiceUtil.getSession();
+		Session session = SettingsUtil.getSession();
 		UserService userService = new UserService(session);
 
 		try {

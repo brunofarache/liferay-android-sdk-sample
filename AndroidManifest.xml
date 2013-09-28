@@ -31,5 +31,10 @@
 			android:name=".activity.DetailsActivity"
 			android:configChanges="orientation|screenSize"
 			android:uiOptions="splitActionBarWhenNarrow" />
+
+		<activity
+			android:name=".activity.SettingsActivity"
+			android:configChanges="orientation|screenSize"
+			android:uiOptions="splitActionBarWhenNarrow" />
 	</application>
 </manifest>

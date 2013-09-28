@@ -10,12 +10,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.liferay.mobile.android.service.Session;
 import com.liferay.mobile.android.task.callback.BaseAsyncTaskCallback;
 import com.liferay.mobile.android.v62.phone.PhoneService;
 import com.liferay.mobile.sample.activity.DetailsActivity;
 import com.liferay.mobile.sample.model.Contact;
 import com.liferay.mobile.sample.model.User;
-import com.liferay.mobile.sample.util.ServiceUtil;
+import com.liferay.mobile.sample.util.SettingsUtil;
 
 public class ContactCallback extends BaseAsyncTaskCallback<Contact> {
 
@@ -25,7 +26,8 @@ public class ContactCallback extends BaseAsyncTaskCallback<Contact> {
 	}
 
 	public JSONArray inBackground(JSONArray array) {
-		PhoneService phoneService = new PhoneService(ServiceUtil.getSession());
+		Session session = SettingsUtil.getSession();
+		PhoneService phoneService = new PhoneService(session);
 
 		try {
 			JSONArray jsonArray = phoneService.getPhones(

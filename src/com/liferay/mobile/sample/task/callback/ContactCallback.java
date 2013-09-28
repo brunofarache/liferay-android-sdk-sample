@@ -17,6 +17,7 @@ import com.liferay.mobile.sample.activity.DetailsActivity;
 import com.liferay.mobile.sample.model.Contact;
 import com.liferay.mobile.sample.model.User;
 import com.liferay.mobile.sample.util.SettingsUtil;
+import com.liferay.mobile.sample.util.ToastUtil;
 
 public class ContactCallback extends BaseAsyncTaskCallback<Contact> {
 
@@ -25,31 +26,30 @@ public class ContactCallback extends BaseAsyncTaskCallback<Contact> {
 		_user = user;
 	}
 
-	public JSONArray inBackground(JSONArray array) {
+	public JSONArray inBackground(JSONArray array) throws Exception {
 		Session session = SettingsUtil.getSession();
 		PhoneService phoneService = new PhoneService(session);
 
-		try {
-			JSONArray jsonArray = phoneService.getPhones(
-				"com.liferay.portal.model.Contact", _user.getContactId());
+		JSONArray jsonArray = phoneService.getPhones(
+			"com.liferay.portal.model.Contact", _user.getContactId());
 
-			_phones = new ArrayList<String>();
+		_phones = new ArrayList<String>();
 
-			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject jsonObj = jsonArray.getJSONObject(i);
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObj = jsonArray.getJSONObject(i);
 
-				_phones.add(jsonObj.getString(_NUMBER));
-			}
-		}
-		catch (Exception e) {
-			Log.e(_CLASS_NAME, "Couldn't get Phones", e);
+			_phones.add(jsonObj.getString(_NUMBER));
 		}
 
 		return array;
 	}
 
 	public void onFailure(Exception exception) {
-		Log.e(_CLASS_NAME, "Couldn't get Contact", exception);
+		String message = "Couldn't get user details";
+
+		Log.e(_CLASS_NAME, message, exception);
+
+		ToastUtil.show(_context, message + ": " + exception.getMessage(), true);
 	}
 
 	public void onSuccess(Contact contact) {

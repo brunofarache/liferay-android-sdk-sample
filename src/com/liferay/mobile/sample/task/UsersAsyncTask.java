@@ -11,6 +11,7 @@ import com.liferay.mobile.android.v62.user.UserService;
 import com.liferay.mobile.sample.activity.MainActivity;
 import com.liferay.mobile.sample.model.User;
 import com.liferay.mobile.sample.util.SettingsUtil;
+import com.liferay.mobile.sample.util.ToastUtil;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -39,12 +40,25 @@ public class UsersAsyncTask extends AsyncTask<Void, Void, ArrayList<User>> {
 			}
 		}
 		catch (Exception e) {
-			Log.e(_CLASS_NAME, "Couldn't get user sites", e);
+			Log.e(_CLASS_NAME, "Couldn't get users", e);
+
+			_exception = e;
+
+			cancel(true);
 		}
 		
 		return users;
 	}
 	
+	public void onCancelled(ArrayList<User> result) {
+		String message = "Couldn't get users";
+
+		Log.e(_CLASS_NAME, message, _exception);
+
+		ToastUtil.show(
+			_activity, message + ": " + _exception.getMessage(), true);
+	}
+
 	public void onPostExecute(ArrayList<User> sites) {
 		_activity.updateUsers(sites);
 	}
@@ -78,5 +92,6 @@ public class UsersAsyncTask extends AsyncTask<Void, Void, ArrayList<User>> {
 	private static String _CLASS_NAME = UsersAsyncTask.class.getName();
 
 	private MainActivity _activity;
+	private Exception _exception;
 
 }

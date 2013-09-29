@@ -3,7 +3,6 @@ package com.liferay.mobile.sample.task.callback;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
@@ -11,7 +10,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.liferay.mobile.android.service.Session;
-import com.liferay.mobile.android.task.callback.BaseAsyncTaskCallback;
+import com.liferay.mobile.android.task.callback.typed.GenericAsyncTaskCallback;
 import com.liferay.mobile.android.v62.phone.PhoneService;
 import com.liferay.mobile.sample.activity.DetailsActivity;
 import com.liferay.mobile.sample.model.Contact;
@@ -19,7 +18,7 @@ import com.liferay.mobile.sample.model.User;
 import com.liferay.mobile.sample.util.SettingsUtil;
 import com.liferay.mobile.sample.util.ToastUtil;
 
-public class ContactCallback extends BaseAsyncTaskCallback<Contact> {
+public class ContactCallback extends GenericAsyncTaskCallback<Contact> {
 
 	public ContactCallback(Context context, User user) {
 		_context = context;
@@ -63,15 +62,8 @@ public class ContactCallback extends BaseAsyncTaskCallback<Contact> {
 		_context.startActivity(intent);
 	}
 
-	public Contact transform(Object obj) {
-		Contact contact = null;
-
-		try {
-			contact = new Contact((JSONObject)obj, _phones);
-		}
-		catch (JSONException je) {
-			Log.e(_CLASS_NAME, "Couldn't transform JSONObject to Contact", je);
-		}
+	public Contact transform(Object obj) throws Exception {
+		Contact contact = new Contact((JSONObject)obj, _phones);
 
 		return contact;
 	}

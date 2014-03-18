@@ -1,5 +1,7 @@
-/bin/
-/gen/
-/out/
-.idea
+bin/
+gen/
+out/
+
 *.iml
+.idea
+.gradle

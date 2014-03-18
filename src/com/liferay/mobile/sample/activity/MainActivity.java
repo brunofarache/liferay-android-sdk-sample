@@ -1,16 +1,34 @@
+/**
+ * Copyright (c) 2000-2014 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 package com.liferay.mobile.sample.activity;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
+
 import android.app.ListActivity;
+
 import android.content.Intent;
+
 import android.os.Build;
 import android.os.Bundle;
+
 import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -23,6 +41,11 @@ import com.liferay.mobile.sample.task.UsersAsyncTask;
 import com.liferay.mobile.sample.task.callback.ContactCallback;
 import com.liferay.mobile.sample.util.SettingsUtil;
 
+import java.util.ArrayList;
+
+/**
+ * @author Bruno Farache
+ */
 public class MainActivity extends ListActivity {
 
 	public void onCreate(Bundle bundle) {
@@ -86,8 +109,8 @@ public class MainActivity extends ListActivity {
 		task.execute();
 	}
 
-	@SuppressWarnings("unchecked")
 	@SuppressLint("NewApi")
+	@SuppressWarnings("unchecked")
 	public void updateUsers(ArrayList<User> users) {
 		ArrayAdapter<User> adapter = (ArrayAdapter<User>)getListAdapter();
 
@@ -100,7 +123,7 @@ public class MainActivity extends ListActivity {
 			for (User user : users) {
 				adapter.add(user);
 			}
-		} 
+		}
 	}
 
 	private static String _CLASS_NAME = MainActivity.class.getName();

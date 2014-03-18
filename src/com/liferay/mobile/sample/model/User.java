@@ -1,11 +1,29 @@
+/**
+ * Copyright (c) 2000-2014 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 package com.liferay.mobile.sample.model;
 
 import android.annotation.SuppressLint;
+
 import java.io.Serializable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * @author Bruno Farache
+ */
 @SuppressWarnings("serial")
 public class User implements Comparable<User>, Serializable {
 
@@ -28,7 +46,7 @@ public class User implements Comparable<User>, Serializable {
 	public int compareTo(User user) {
 		return _name.toLowerCase().compareTo(user.getName().toLowerCase());
 	}
-	
+
 	public Contact getContact() {
 		return _contact;
 	}
@@ -36,7 +54,7 @@ public class User implements Comparable<User>, Serializable {
 	public long getContactId() {
 		return _contactId;
 	}
-	
+
 	public String getLastName() {
 		return _lastName;
 	}
@@ -48,7 +66,7 @@ public class User implements Comparable<User>, Serializable {
 	public long getUserId() {
 		return _userId;
 	}
-	
+
 	public void setContact(Contact contact) {
 		_contact = contact;
 	}
@@ -56,7 +74,7 @@ public class User implements Comparable<User>, Serializable {
 	public void setContactId(long contactId) {
 		_contactId = contactId;
 	}
-	
+
 	public void setLastName(String lastName) {
 		_lastName = lastName;
 	}
@@ -68,7 +86,7 @@ public class User implements Comparable<User>, Serializable {
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
-	
+
 	public String toString() {
 		return _name;
 	}

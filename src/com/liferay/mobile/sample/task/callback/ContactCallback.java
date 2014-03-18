@@ -1,12 +1,22 @@
+/**
+ * Copyright (c) 2000-2014 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 package com.liferay.mobile.sample.task.callback;
-
-import java.util.ArrayList;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
+
 import android.util.Log;
 
 import com.liferay.mobile.android.service.Session;
@@ -18,6 +28,14 @@ import com.liferay.mobile.sample.model.User;
 import com.liferay.mobile.sample.util.SettingsUtil;
 import com.liferay.mobile.sample.util.ToastUtil;
 
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+/**
+ * @author Bruno Farache
+ */
 public class ContactCallback extends GenericAsyncTaskCallback<Contact> {
 
 	public ContactCallback(Context context, User user) {
@@ -69,6 +87,7 @@ public class ContactCallback extends GenericAsyncTaskCallback<Contact> {
 	}
 
 	private static String _CLASS_NAME = ContactCallback.class.getName();
+
 	private static String _NUMBER = "number";
 
 	private Context _context;

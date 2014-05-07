@@ -2,7 +2,7 @@ apply plugin: 'android'
 
 android {
 	compileSdkVersion 19
-	buildToolsVersion '19.0.0'
+	buildToolsVersion '19.0.3'
 
 	sourceSets {
 		main {
@@ -37,7 +37,7 @@ repositories {
 }
 
 dependencies {
-	compile group: 'com.liferay.mobile', name: 'liferay-android-sdk', version: '6.2.0.1'
+	compile group: 'com.liferay.mobile', name: 'liferay-android-sdk', version: '6.2.0.2'
 	compile group: 'com.android.support', name: 'support-v4', version: '19.0.+'
 
 	formatter group: 'com.liferay.portal', name: 'portal-impl', version: '6.2.0-ga1'

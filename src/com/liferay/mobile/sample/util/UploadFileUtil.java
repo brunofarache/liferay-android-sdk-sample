@@ -58,8 +58,8 @@ public class UploadFileUtil {
 			}
 
 			@Override
-			public void onProgress(int bytes) {
-				Log.d(_CLASS_NAME, "bytes = " + bytes);
+			public void onProgress(int totalBytes) {
+				Log.d(_CLASS_NAME, "totalBytes = " + totalBytes);
 			}
 
 			@Override

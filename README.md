@@ -41,18 +41,17 @@ create a `local.properties` file for you.
 ### Build
 
 This project uses Gradle as the build and dependency management system. If you
-don't want to use Gradle, you can download the
-[Android SDK jar file](https://github.com/liferay/liferay-mobile-sdk/releases),
-and add it to your project classpath. In Android Developer Tools (ADT), you can
-drop the jar to the `/libs` folder, it will automatically add the SDK to your
-classpath.
+don't want to use Gradle, you can download the Android SDK JAR and its
+dependencies and copy them to your project's `/libs` folder, follow the
+instructions described [here](https://github.com/liferay/liferay-mobile-sdk/tree/master/android#manually).
 
 In order to build with Gradle, you have to:
 
 1. Create a local.properties files with a `sdk.dir=` property pointing to your
 Android SDK folder.
 
-2. Run `$ ./gradlew build` from the project root folder.
+2. Run `$ ./gradlew build` from the project root folder. This will
+automatically download the Android SDK and dependencies for you.
 
 There are many more useful tasks, for example, for running your project in an
 emulator or device. Run `$ ./gradlew tasks` to see which tasks are available.

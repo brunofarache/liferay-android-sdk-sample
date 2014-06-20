@@ -3,7 +3,7 @@ apply plugin: 'idea'
 
 android {
 	compileSdkVersion 19
-	buildToolsVersion '19.0.3'
+	buildToolsVersion '19.1.0'
 
 	packagingOptions {
 		exclude 'META-INF/LICENSE'
@@ -26,7 +26,7 @@ buildscript {
 	}
 
 	dependencies {
-		classpath 'com.android.tools.build:gradle:0.9.+'
+		classpath 'com.android.tools.build:gradle:0.11.+'
 	}
 }
 
@@ -61,5 +61,5 @@ task format(type: JavaExec) {
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '1.10'
+	gradleVersion = '1.12'
 }

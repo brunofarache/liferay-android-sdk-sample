@@ -32,16 +32,22 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.liferay.mobile.android.auth.SignIn;
 import com.liferay.mobile.android.service.Session;
 import com.liferay.mobile.android.task.callback.AsyncTaskCallback;
+import com.liferay.mobile.android.task.callback.typed.JSONObjectAsyncTaskCallback;
 import com.liferay.mobile.android.v62.contact.ContactService;
 import com.liferay.mobile.sample.R;
 import com.liferay.mobile.sample.model.User;
 import com.liferay.mobile.sample.task.UsersAsyncTask;
 import com.liferay.mobile.sample.task.callback.ContactCallback;
 import com.liferay.mobile.sample.util.SettingsUtil;
+import com.liferay.mobile.sample.util.ToastUtil;
 
 import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * @author Bruno Farache
@@ -105,8 +111,9 @@ public class MainActivity extends ListActivity {
 		super.onResume();
 
 		UsersAsyncTask task = new UsersAsyncTask(this);
-
 		task.execute();
+
+		signIn();
 	}
 
 	@SuppressLint("NewApi")
@@ -124,6 +131,35 @@ public class MainActivity extends ListActivity {
 				adapter.add(user);
 			}
 		}
+	}
+
+	protected void signIn() {
+		Session session = SettingsUtil.getSession();
+
+		SignIn.signIn(session, new JSONObjectAsyncTaskCallback() {
+
+			@Override
+			public void onSuccess(JSONObject userJSONObject) {
+				try {
+					User user = new User(userJSONObject);
+
+					ToastUtil.show(
+						MainActivity.this,
+						"Authentication worked! User name: " + user.getName());
+				}
+				catch (JSONException e) {
+					onFailure(e);
+				}
+			}
+
+			@Override
+			public void onFailure(Exception e) {
+				ToastUtil.show(
+					MainActivity.this, "Authentication failed! " +
+						e.getMessage());
+			}
+
+		});
 	}
 
 	private static String _CLASS_NAME = MainActivity.class.getName();

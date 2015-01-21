@@ -19,6 +19,7 @@ import android.content.SharedPreferences;
 
 import android.preference.PreferenceManager;
 
+import com.liferay.mobile.android.auth.basic.BasicAuthentication;
 import com.liferay.mobile.android.service.Session;
 import com.liferay.mobile.android.service.SessionImpl;
 
@@ -46,7 +47,8 @@ public class SettingsUtil {
 	}
 
 	public static Session getSession() {
-		return new SessionImpl(getServer(), getLogin(), getPassword());
+		return new SessionImpl(
+			getServer(), new BasicAuthentication(getLogin(), getPassword()));
 	}
 
 	public static void init(Context context) {

@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'idea'
 
+if (file('../../formatter.gradle').exists()) {
+	apply from: '../../formatter.gradle'
+	format.workingDir = 'src'
+}
+
 android {
 	compileSdkVersion 21
 	buildToolsVersion '21.1.1'
@@ -30,15 +35,8 @@ buildscript {
 	}
 }
 
-configurations {
-	formatter
-}
-
 repositories {
 	mavenLocal()
-	maven {
-		url 'https://repository.liferay.com/nexus/content/groups/liferay-ce'
-	}
 	jcenter()
 	mavenCentral()
 }
@@ -46,18 +44,6 @@ repositories {
 dependencies {
 	compile group: 'com.liferay.mobile', name: 'liferay-android-sdk', version: '6.2.0.14'
 	compile group: 'com.android.support', name: 'support-v4', version: '19.0.+'
-
-	formatter group: 'com.liferay.portal', name: 'portal-impl', version: '6.2.0-ga1'
-	formatter group: 'com.liferay.portal', name: 'portal-service', version: '6.2.0-ga1'
-	formatter group: 'com.liferay.portal', name: 'util-java', version: '6.2.0-ga1'
-	formatter group: 'dom4j', name: 'dom4j', version: '1.6.1'
-	formatter group: 'org.apache.ant', name: 'ant', version: '1.8.2'
-}
-
-task format(type: JavaExec) {
-	main = 'com.liferay.portal.tools.sourceformatter.SourceFormatter'
-	classpath = configurations.formatter
-	workingDir = 'src'
 }
 
 task wrapper(type: Wrapper) {

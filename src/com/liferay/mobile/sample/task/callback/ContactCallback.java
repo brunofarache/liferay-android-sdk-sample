@@ -19,8 +19,8 @@ import android.content.Intent;
 
 import android.util.Log;
 
+import com.liferay.mobile.android.callback.typed.GenericCallback;
 import com.liferay.mobile.android.service.Session;
-import com.liferay.mobile.android.task.callback.typed.GenericAsyncTaskCallback;
 import com.liferay.mobile.android.v62.phone.PhoneService;
 import com.liferay.mobile.sample.activity.DetailsActivity;
 import com.liferay.mobile.sample.model.Contact;
@@ -36,31 +36,34 @@ import org.json.JSONObject;
 /**
  * @author Bruno Farache
  */
-public class ContactCallback extends GenericAsyncTaskCallback<Contact> {
+public class ContactCallback extends GenericCallback<Contact> {
 
 	public ContactCallback(Context context, User user) {
 		_context = context;
 		_user = user;
 	}
 
-	public JSONArray inBackground(JSONArray array) throws Exception {
+	@Override
+	public Contact inBackground(Contact contact) throws Exception {
 		Session session = SettingsUtil.getSession();
 		PhoneService phoneService = new PhoneService(session);
 
 		JSONArray jsonArray = phoneService.getPhones(
 			"com.liferay.portal.model.Contact", _user.getContactId());
 
-		_phones = new ArrayList<String>();
+		ArrayList<String> phones = new ArrayList<>();
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
-
-			_phones.add(jsonObj.getString(_NUMBER));
+			phones.add(jsonObj.getString(_NUMBER));
 		}
 
-		return array;
+		contact.setPhones(phones);
+
+		return contact;
 	}
 
+	@Override
 	public void onFailure(Exception exception) {
 		String message = "Couldn't get user details";
 
@@ -69,6 +72,7 @@ public class ContactCallback extends GenericAsyncTaskCallback<Contact> {
 		ToastUtil.show(_context, message + ": " + exception.getMessage(), true);
 	}
 
+	@Override
 	public void onSuccess(Contact contact) {
 		_user.setContact(contact);
 
@@ -80,10 +84,9 @@ public class ContactCallback extends GenericAsyncTaskCallback<Contact> {
 		_context.startActivity(intent);
 	}
 
+	@Override
 	public Contact transform(Object obj) throws Exception {
-		Contact contact = new Contact((JSONObject)obj, _phones);
-
-		return contact;
+		return new Contact((JSONObject)obj);
 	}
 
 	private static String _CLASS_NAME = ContactCallback.class.getName();
@@ -91,7 +94,6 @@ public class ContactCallback extends GenericAsyncTaskCallback<Contact> {
 	private static String _NUMBER = "number";
 
 	private Context _context;
-	ArrayList<String> _phones;
 	private User _user;
 
 }

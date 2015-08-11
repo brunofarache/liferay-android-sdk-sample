@@ -8,12 +8,7 @@ if (file('../../formatter.gradle').exists()) {
 
 android {
 	compileSdkVersion 21
-	buildToolsVersion '21.1.1'
-
-	packagingOptions {
-		exclude 'META-INF/LICENSE'
-		exclude 'META-INF/NOTICE'
-	}
+	buildToolsVersion '21.1.2'
 
 	sourceSets {
 		main {
@@ -31,7 +26,7 @@ buildscript {
 	}
 
 	dependencies {
-		classpath 'com.android.tools.build:gradle:1.0.0'
+		classpath 'com.android.tools.build:gradle:1.2.3'
 	}
 }
 
@@ -42,10 +37,10 @@ repositories {
 }
 
 dependencies {
-	compile group: 'com.liferay.mobile', name: 'liferay-android-sdk', version: '6.2.0.14'
-	compile group: 'com.android.support', name: 'support-v4', version: '19.0.+'
+	compile group: 'com.liferay.mobile', name: 'liferay-android-sdk', version: '2.0'
+	compile group: 'com.android.support', name: 'support-v4', version: '21.0.3'
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '2.2.1'
+	gradleVersion = '2.4'
 }

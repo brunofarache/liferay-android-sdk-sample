@@ -34,12 +34,9 @@ public class Contact implements Serializable {
 
 	public static final String EMAIL_ADDRESS = "emailAddress";
 
-	public Contact(JSONObject jsonObj, ArrayList<String> phones)
-		throws JSONException {
-
+	public Contact(JSONObject jsonObj) throws JSONException {
 		setBirthday(jsonObj.getLong(BIRTHDAY));
 		_emailAddress = jsonObj.getString(EMAIL_ADDRESS);
-		_phones = phones;
 	}
 
 	public String getBirthday() {

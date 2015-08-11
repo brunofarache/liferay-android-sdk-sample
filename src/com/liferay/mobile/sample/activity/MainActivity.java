@@ -33,9 +33,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.liferay.mobile.android.auth.SignIn;
+import com.liferay.mobile.android.callback.Callback;
+import com.liferay.mobile.android.callback.typed.JSONObjectCallback;
 import com.liferay.mobile.android.service.Session;
-import com.liferay.mobile.android.task.callback.AsyncTaskCallback;
-import com.liferay.mobile.android.task.callback.typed.JSONObjectAsyncTaskCallback;
 import com.liferay.mobile.android.v62.contact.ContactService;
 import com.liferay.mobile.sample.R;
 import com.liferay.mobile.sample.model.User;
@@ -79,7 +79,7 @@ public class MainActivity extends ListActivity {
 		Session session = SettingsUtil.getSession();
 		ContactService contactService = new ContactService(session);
 
-		AsyncTaskCallback callback = new ContactCallback(this, user);
+		Callback callback = new ContactCallback(this, user);
 
 		session.setCallback(callback);
 
@@ -136,7 +136,7 @@ public class MainActivity extends ListActivity {
 	protected void signIn() {
 		Session session = SettingsUtil.getSession();
 
-		SignIn.signIn(session, new JSONObjectAsyncTaskCallback() {
+		SignIn.signIn(session, new JSONObjectCallback() {
 
 			@Override
 			public void onSuccess(JSONObject userJSONObject) {

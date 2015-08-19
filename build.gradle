@@ -18,6 +18,10 @@ android {
 			res.srcDirs = ['res']
 		}
 	}
+
+	lintOptions {
+		abortOnError false
+	}
 }
 
 buildscript {
@@ -37,7 +41,7 @@ repositories {
 }
 
 dependencies {
-	compile group: 'com.liferay.mobile', name: 'liferay-android-sdk', version: '2.0'
+	compile group: 'com.liferay.mobile', name: 'liferay-android-sdk', version: '2.0.1'
 	compile group: 'com.android.support', name: 'support-v4', version: '21.0.3'
 }
 
